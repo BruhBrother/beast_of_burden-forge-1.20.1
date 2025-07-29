@@ -1,6 +1,11 @@
 package net.bruhbrother.beast_of_burden;
 
 import com.mojang.logging.LogUtils;
+import net.bruhbrother.beast_of_burden.entity.ModEntities;
+import net.bruhbrother.beast_of_burden.entity.client.BobotRenderer;
+import net.bruhbrother.beast_of_burden.entity.client.LampbugRenderer;
+import net.bruhbrother.beast_of_burden.item.ModItems;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -25,6 +30,9 @@ public class BeastofBurden
     public BeastofBurden()
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModEntities.register(modEventBus);
+        ModItems.register(modEventBus);
 
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
@@ -61,7 +69,8 @@ public class BeastofBurden
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-
+            EntityRenderers.register(ModEntities.BOBOT.get(), BobotRenderer::new);
+            EntityRenderers.register(ModEntities.LAMPBUG.get(), LampbugRenderer::new);
         }
     }
 }
