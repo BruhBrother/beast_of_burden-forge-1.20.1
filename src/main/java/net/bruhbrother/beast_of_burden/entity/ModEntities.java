@@ -2,7 +2,6 @@ package net.bruhbrother.beast_of_burden.entity;
 
 import net.bruhbrother.beast_of_burden.BeastofBurden;
 import net.bruhbrother.beast_of_burden.entity.custom.BobotEntity;
-import net.bruhbrother.beast_of_burden.entity.custom.LampbugEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -21,11 +20,6 @@ public class ModEntities {
                             .sized(0.8f, 3.1f)
                             .build(new ResourceLocation(BeastofBurden.MOD_ID, "bobot").toString()));
 
-    public static final RegistryObject<EntityType<LampbugEntity>> LAMPBUG =
-            ENTITY_TYPES.register("lamp_bug",
-                    () -> EntityType.Builder.of(LampbugEntity::new, MobCategory.AMBIENT)
-                            .sized(0.6f, 0.6f)
-                            .build(new ResourceLocation(BeastofBurden.MOD_ID, "lamp_bug").toString()));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);
