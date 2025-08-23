@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import net.bruhbrother.beast_of_burden.block.Modblocks;
 import net.bruhbrother.beast_of_burden.entity.ModEntities;
 import net.bruhbrother.beast_of_burden.entity.client.BobotRenderer;
+import net.bruhbrother.beast_of_burden.entity.client.LampbugRenderer;
 import net.bruhbrother.beast_of_burden.item.ModItems;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
@@ -71,6 +72,8 @@ public class BeastofBurden
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             EntityRenderers.register(ModEntities.BOBOT.get(), BobotRenderer::new);
+            EntityRenderers.register(ModEntities.LAMPBUG.get(), LampbugRenderer::new);
+
         }
     }
 }
