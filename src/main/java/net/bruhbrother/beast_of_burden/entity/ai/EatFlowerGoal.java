@@ -11,6 +11,21 @@ import java.util.EnumSet;
 public class EatFlowerGoal extends Goal {
     private final LampbugEntity lampbug;
     private int cooldown = 0;
+    private BlockPos findNearbyFlower() {
+        BlockPos origin = lampbug.blockPosition();
+        int radius = 5; // search radius
+        for (int x = -radius; x <= radius; x++) {
+            for (int y = -1; y <= 1; y++) {
+                for (int z = -radius; z <= radius; z++) {
+                    BlockPos pos = origin.offset(x, y, z);
+                    if (lampbug.level().getBlockState(pos).is(BlockTags.FLOWERS)) {
+                        return pos;
+                    }
+                }
+            }
+        }
+        return null; // no flower found nearby
+    }
 
     public EatFlowerGoal(LampbugEntity lampbugEntity) {
         this.lampbug = lampbugEntity;
@@ -29,13 +44,21 @@ public class EatFlowerGoal extends Goal {
             return;
         }
 
+        // 1. Find a nearby flower
+        BlockPos flowerPos = findNearbyFlower();
+        if (flowerPos != null) {
+            // Move toward it
+            lampbug.getNavigation().moveTo(flowerPos.getX(), flowerPos.getY(), flowerPos.getZ(), 1.0);
+        }
+
+        // 2. Check block below to eat
         BlockPos pos = lampbug.blockPosition();
         BlockState stateBelow = lampbug.level().getBlockState(pos.below());
 
         if (stateBelow.is(BlockTags.FLOWERS)) {
-            lampbug.level().destroyBlock(pos.below(), false); // "eat" the flower
+            lampbug.level().destroyBlock(pos.below(), false); // eat the flower
             lampbug.incrementFlowers();
-            cooldown = 40; // 2 seconds cooldown before eating next flower
+            cooldown = 40;
         }
     }
 
