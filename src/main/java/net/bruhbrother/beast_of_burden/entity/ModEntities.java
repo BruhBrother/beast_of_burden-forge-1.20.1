@@ -2,6 +2,7 @@ package net.bruhbrother.beast_of_burden.entity;
 
 import net.bruhbrother.beast_of_burden.BeastofBurden;
 import net.bruhbrother.beast_of_burden.entity.custom.BobotEntity;
+import net.bruhbrother.beast_of_burden.entity.custom.CoalconstructEntity;
 import net.bruhbrother.beast_of_burden.entity.custom.LampbugEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -27,6 +28,11 @@ public class ModEntities {
                             .sized(0.8f, 0.8f)
                             .build("lampbug"));
 
+    public static final RegistryObject<EntityType<CoalconstructEntity>> COALCONSTRUCT =
+            ENTITY_TYPES.register("coalconstruct",
+                    () -> EntityType.Builder.of(CoalconstructEntity::new, MobCategory.MONSTER)
+                            .sized(0.8f, 1.5f)
+                            .build("coalconstruct"));
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

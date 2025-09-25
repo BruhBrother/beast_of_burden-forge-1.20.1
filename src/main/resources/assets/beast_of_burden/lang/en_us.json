@@ -1,3 +1,8 @@
 {
-  "item.beast_of_burden.bobot_spawn_egg": "Bobot Spawn Egg"
+  "item.beast_of_burden.bobot_spawn_egg": "Bobot Spawn Egg",
+  "item.beast_of_burden.coalconstruct_spawn_egg": "Coal Construct Spawn Egg",
+  "item.beast_of_burden.lampbug_spawn_egg": "Lamp Bug Spawn Egg",
+  "entity.beast_of_burden.bobot": "Bobot",
+  "entity.beast_of_burden.coalconstruct": "Coal Construct",
+  "entity.beast_of_burden.lampbug": "Lamp Bug"
 }

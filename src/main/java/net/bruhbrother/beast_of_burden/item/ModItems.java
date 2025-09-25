@@ -13,7 +13,15 @@ public class ModItems {
             DeferredRegister.create(ForgeRegistries.ITEMS, "beast_of_burden");
 
     public static final RegistryObject<Item> BOBOT_SPAWN_EGG = ITEMS.register("bobot_spawn_egg",
-            () -> new ForgeSpawnEggItem(ModEntities.BOBOT, 0x4CAF50, 0x2E7D32,
+            () -> new ForgeSpawnEggItem(ModEntities.BOBOT, 0x171616, 0x171616,
+                    new Item.Properties()));
+
+    public static final RegistryObject<Item> COALCONSTRUCT_SPAWN_EGG = ITEMS.register("coalconstruct_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.COALCONSTRUCT, 0x171616, 0x6B6969,
+                    new Item.Properties()));
+
+    public static final RegistryObject<Item> LAMPBUG_SPAWN_EGG = ITEMS.register("lampbug_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.LAMPBUG, 0x171616, 0x7ECC49,
                     new Item.Properties()));
 
     public static void register(IEventBus eventBus) {

@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import net.bruhbrother.beast_of_burden.block.Modblocks;
 import net.bruhbrother.beast_of_burden.entity.ModEntities;
 import net.bruhbrother.beast_of_burden.entity.client.BobotRenderer;
+import net.bruhbrother.beast_of_burden.entity.client.CoalconstructRenderer;
 import net.bruhbrother.beast_of_burden.entity.client.LampbugRenderer;
 import net.bruhbrother.beast_of_burden.item.ModItems;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -73,7 +74,7 @@ public class BeastofBurden
         {
             EntityRenderers.register(ModEntities.BOBOT.get(), BobotRenderer::new);
             EntityRenderers.register(ModEntities.LAMPBUG.get(), LampbugRenderer::new);
-
+            EntityRenderers.register(ModEntities.COALCONSTRUCT.get(), CoalconstructRenderer::new);
         }
     }
 }
