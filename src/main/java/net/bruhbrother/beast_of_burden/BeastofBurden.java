@@ -8,6 +8,7 @@ import net.bruhbrother.beast_of_burden.entity.client.CoalconstructRenderer;
 import net.bruhbrother.beast_of_burden.entity.client.LampbugRenderer;
 import net.bruhbrother.beast_of_burden.item.ModItems;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -55,7 +56,11 @@ public class BeastofBurden
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
-
+        if(event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
+            event.accept(ModItems.BOBOT_SPAWN_EGG);
+            event.accept(ModItems.LAMPBUG_SPAWN_EGG);
+            event.accept(ModItems.COALCONSTRUCT_SPAWN_EGG);
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call

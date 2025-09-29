@@ -1,5 +1,9 @@
 package net.bruhbrother.beast_of_burden.entity.custom;
 
+import net.bruhbrother.beast_of_burden.entity.ai.CoalAttackGoal;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -49,7 +53,7 @@ public class CoalconstructEntity extends Monster implements GeoEntity {
         this.goalSelector.addGoal(0, new FloatGoal(this));
 
         // Use vanilla MeleeAttackGoal for chasing & attacking
-        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, true) {
+        this.goalSelector.addGoal(1, new CoalAttackGoal(this, 1.0D, true) {
             @Override
             protected double getAttackReachSqr(@NotNull LivingEntity target) {
                 return 3.0D;
@@ -75,19 +79,32 @@ public class CoalconstructEntity extends Monster implements GeoEntity {
     }
 
     private <T extends GeoAnimatable> PlayState attackPredicate(AnimationState<T> state) {
-        if (this.swinging && state.getController().getAnimationState() == AnimationController.State.STOPPED) {
+        if (this.isAttacking() && state.getController().getAnimationState() == AnimationController.State.STOPPED) {
             state.getController().forceAnimationReset();
 
             // Randomly choose left or right attack
             String attackAnim = this.getRandom().nextBoolean() ? "attack_l" : "attack_r";
-
             state.getController().setAnimation(RawAnimation.begin().thenPlay(attackAnim));
-
-            this.swinging = false; // reset flag after starting animation
         }
         return PlayState.CONTINUE;
     }
 
+    private static final EntityDataAccessor<Boolean> ATTACKING =
+            SynchedEntityData.defineId(CoalconstructEntity.class, EntityDataSerializers.BOOLEAN);
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(ATTACKING, false);
+    }
+
+    public void setAttacking(boolean attacking) {
+        this.entityData.set(ATTACKING, attacking);
+    }
+
+    public boolean isAttacking() {
+        return this.entityData.get(ATTACKING);
+    }
 
     // === Register Controllers ===
     @Override

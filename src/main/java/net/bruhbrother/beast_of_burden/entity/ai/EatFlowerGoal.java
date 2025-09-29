@@ -13,9 +13,9 @@ public class EatFlowerGoal extends Goal {
     private int cooldown = 0;
     private BlockPos findNearbyFlower() {
         BlockPos origin = lampbug.blockPosition();
-        int radius = 5; // search radius
+        int radius = 20; // search radius
         for (int x = -radius; x <= radius; x++) {
-            for (int y = -1; y <= 1; y++) {
+            for (int y = -radius; y <= radius; y++) {
                 for (int z = -radius; z <= radius; z++) {
                     BlockPos pos = origin.offset(x, y, z);
                     if (lampbug.level().getBlockState(pos).is(BlockTags.FLOWERS)) {
